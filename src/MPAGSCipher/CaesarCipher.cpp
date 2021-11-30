@@ -26,13 +26,13 @@ CaesarCipher::CaesarCipher(const std::string& key) : key_{0}
             key_ = std::stoul(key) % Alphabet::size;
         } catch (std::invalid_argument&) {
             std::cerr
-                << "[error] cipher key must be an unsigned long integer for Caesar cipher,\n"
+                << "[error] (invalid_argument) cipher key must be an unsigned long integer for Caesar cipher,\n"
                 << "        the supplied key (" << key
                 << ") could not be successfully converted." << std::endl;
                 return;
         } catch (std::out_of_range&) {
             std::cerr
-                << "[error] cipher key must be an unsigned long integer for Caesar cipher,\n"
+                << "[error] (out_of_range) cipher key must be an unsigned long integer for Caesar cipher,\n"
                 << "        the supplied key (" << key
                 << ") could not be successfully converted." << std::endl;
                 return;
