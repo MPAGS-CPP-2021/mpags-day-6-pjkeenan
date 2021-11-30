@@ -4,6 +4,7 @@
 #include "CipherMode.hpp"
 
 #include <string>
+#include <stdexcept>
 
 /**
  * \file Cipher.hpp
@@ -45,6 +46,21 @@ class Cipher {
     Cipher& operator=(Cipher&& rhs) = default;
     /// Make the default destructor virtual
     virtual ~Cipher() = default;
+};
+
+/**
+ * \class InvalidKey
+ * \brief Custom exception class for an invalid key
+ *
+ * Custom exception class for when an invalid key is supplied to a cipher object instance
+ */
+class InvalidKey : public std::invalid_argument {
+  public:
+    /**
+     * \brief Construct an InvalidKey exception
+     * \param msg the diagnostic message
+     */
+    InvalidKey(const std::string& msg) : std::invalid_argument(msg) {}
 };
 
 #endif
