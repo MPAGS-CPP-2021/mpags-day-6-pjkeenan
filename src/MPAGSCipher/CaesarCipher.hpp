@@ -30,6 +30,7 @@ class CaesarCipher : public Cipher {
      * \brief Create a new CaesarCipher, converting the given string into the key
      *
      * \param key the string to convert into the key to be used in the cipher
+     * \exception InvalidKey will be emitted if the supplied string cannot be converted to an unsigned long int
      */
     explicit CaesarCipher(const std::string& key);
 
