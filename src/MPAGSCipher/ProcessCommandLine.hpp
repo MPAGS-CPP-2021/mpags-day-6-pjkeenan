@@ -6,6 +6,7 @@
 
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 /**
  * \file ProcessCommandLine.hpp
@@ -38,9 +39,41 @@ struct ProgramSettings {
  *
  * \param cmdLineArgs the command-line arguments to be processed
  * \param settings the program settings to be modified based upon the arguments received
- * \return true if the arguments could be successfully parsed, false otherwise
+ * \exception MissingArgument will be emitted if a required argument is not given
+ * \exception UnknownArgument will be emitted if an argument is not known
  */
-bool processCommandLine(const std::vector<std::string>& cmdLineArgs,
+void processCommandLine(const std::vector<std::string>& cmdLineArgs,
                         ProgramSettings& settings);
+
+
+/**
+ * \class MissingArgument
+ * \brief Custom exception class for a missing command-line argument
+ *
+ * Custom exception class for when a known option/flag is not followed by an argument value
+ */
+class MissingArgument : public std::invalid_argument {
+  public:
+    /** 
+     * \brief Construct a MissingArgument exception
+     * \param msg the output diagnostic text
+     */
+    MissingArgument(const std::string& msg) : std::invalid_argument(msg) {}
+};
+
+/**
+ * \class UnknownArgument
+ * \brief Custom exception class for an unknown command-line argument
+ *
+ * Custom exception class for when an unknown arguemt is supplied
+ */
+class UnknownArgument : public std::invalid_argument {
+  public:
+    /** 
+     * \brief Construct an UnknownArgument exception
+     * \param msg the output diagnostic text
+     */
+    UnknownArgument(const std::string& msg) : std::invalid_argument(msg) {}
+};
 
 #endif    // MPAGSCIPHER_PROCESSCOMMANDLINE_HPP
